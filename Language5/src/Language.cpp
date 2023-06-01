@@ -146,7 +146,7 @@ void Language::sort(){
     }
 }
 
-void Language::save(const char fileName[]) const {
+void Language::save(const char fileName[], char mode)  const {
     ofstream outFile;
     outFile.open(fileName);
     if (!outFile) {
@@ -213,17 +213,7 @@ void Language::load(const char fileName[]) {
     // Crear un nuevo array de BigramFreq
     _vectorBigramFreq = new BigramFreq[_size];
     
-    for (int i = 0; i < size; i++) {
-        BigramFreq bf;
-        string bigram_text = "";
-        int bigram_freq = 0;
-        inFile >> bigram_text;
-        inFile >> bigram_freq;
-        bf.setBigram(Bigram(bigram_text));
-        bf.setFrequency(bigram_freq);
-        
-        this->_vectorBigramFreq[i] = bf;
-    }
+    inFile >> *this;
 
     if (!inFile) {
         throw ios_base::failure("Error reading from file");
@@ -274,6 +264,13 @@ ostream& operator<<(ostream& os, const Language& language){
     os << language.toString();
     return os;
 }
-istream& operator>>(istream& is, const Language& language){
+istream& operator>>(istream& is, Language& language){
+    
+    for (int i = 0; i < language.getSize(); i++) {
+        BigramFreq bf;
+        is >> bf;
+        language.at(i) = bf;
+    }
+    return is;
     
 }

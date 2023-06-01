@@ -174,7 +174,7 @@ public:
      * if the given file cannot be opened or if an error occurs while writing
      * to the file
      */
-    void save(const char fileName[], char mode = 't') const;
+    void save(const char fileName[], char mode = 't') const ;
 
     
      /**
@@ -221,7 +221,7 @@ public:
      * @param index index of the element. Input parameter 
      * @return A reference to the BigramFreq object at position @p index
      */
-    BigramFreq operator[](const int index);
+    BigramFreq& operator[](const int index);
     
     /**
      * @brief Overloading of the += operator with a Language parameter. 
@@ -233,7 +233,9 @@ public:
      * @return A reference to this object.
      */
     Language operator+=(const Language& language);
-      
+    friend std::ostream& operator<<(std::ostream& os, const Language& language);
+    friend std::istream& operator>>(std::istream& is, const Language& language);
+    
 private:
     
     void Copy(const Language& orig);
@@ -262,6 +264,6 @@ std::ostream& operator<<(std::ostream& os, const Language& language);
  * @return @p is A reference to the input s#include <fstream>
 
  */
-std::istream& operator>>(std::istream& is, const Language& language);
+std::istream& operator>>(std::istream& is, Language& language);
 
 #endif /* LANGUAGE_H */

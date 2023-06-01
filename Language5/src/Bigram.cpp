@@ -56,7 +56,6 @@ string Bigram::toString()const{
 }
 
 const char& Bigram::at(int index) const{
-    s
     if(index<0 || index >1)
         throw out_of_range("Bigram.cpp, Bigram::at(int index)const\n\t-Error, indice no valido");
     else
@@ -98,7 +97,10 @@ ostream& operator<<(ostream& os, const Bigram& bigram){
     return os;
 }
 
-istream& operator>>(istream& is, const Bigram& bigram){
-    is >> bigram.at(0) >> bigram.at(1);
+istream& operator>>(istream& is, Bigram& bigram){
+    string tmp;
+    is >> tmp;
+    bigram.at(0) = tmp.at(0);
+    bigram.at(1) = tmp.at(1);
     return is;
 }

@@ -139,7 +139,7 @@ std::ostream& operator<<(std::ostream& os, const Bigram& bigram);
  * @param bigram the Bigram object. Output parameter
  * @return @p A reference to the input stream
  */
-std::istream operator>>(std::istream& is, Bigram& bigram);
+std::istream& operator>>(std::istream& is, Bigram& bigram);
 
 #endif /* BIGRAM_H */
 

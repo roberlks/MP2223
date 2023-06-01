@@ -12,11 +12,16 @@
  * Created on 29 January 2023, 11:00
  */
 
+
+
+#include "Language.h"
+using namespace std;
 /**
  * Shows help about the use of this program in the given output stream
  * @param outputStream The output stream where the help will be shown (for example,
  * cout, cerr, etc) 
  */
+
 void showEnglishHelp(ostream& outputStream) {
     outputStream << "Error, run with the following parameters:" << endl;
     outputStream << "LEARN [-t|-b] [-l languageId] [-o outputFilename] <text1.txt> [<text2.txt> <text3.txt> .... ]" << endl;
@@ -38,8 +43,13 @@ void showEnglishHelp(ostream& outputStream) {
  * @param argv The vector of command line parameters (cstrings)
  * @return 0 If there is no error; a value > 0 if error
  */
+using namespace std;
 
 int main(int argc, char *argv[]) {   
-
+    
+    Language lg;
+    lg.load(argv[1]);
+    cout << lg;
+    
 }
 
