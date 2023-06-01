@@ -1,0 +1,9 @@
+Language.cpp{
+Load() que use >>
+save() que use <<
+sort() DONE
+[] DONE
+<< >>
++= (join) DONE
+__________________________
+MAINS
