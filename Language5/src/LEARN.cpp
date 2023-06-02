@@ -46,12 +46,19 @@ void showEnglishHelp(ostream& outputStream) {
 using namespace std;
 
 int main(int argc,char *argv[]) {   
-    
+    /*
     string valid = "abcdefghijklmnopqrstuvwxyz\xE0\xE1\xE2\xE3\xE4\xE5\xE6\xE7\xE8\xE9\xEA\xEB\xEC\xED\xEE\xEF\xF0\xF1\xF2\xF3\xF4\xF5\xF6\xF8\xF9\xFA\xFB\xFC\xFD\xFE\xFF";
-
+    cout << "Valid chars:\n";
+    for (int i = 0; i < valid.length(); i++){
+        cout << valid[i] << endl;
+    }
+    
+    cout << "DONE" << endl;
+    */
     Language lg;
     lg.load(argv[1]);
     lg.save(argv[2]);
-    cout << "REady";
+    cout <<"Bigrams stored:\n" << lg;
+    cout << "REady\n" << endl;
 }
 
