@@ -152,8 +152,17 @@ void Language::save(const char fileName[], char mode)  const {
     if (!outFile) {
         throw ios_base::failure("Error opening output file");
     }
+    
     outFile << this->MAGIC_STRING_T << endl;
-    outFile << toString();
+    if (mode == 'b'){
+        outFile << *this;
+    }
+    else {
+        for (int i = 0; i< this->_size ; i++){
+            this->_vectorBigramFreq[i].serialize(outFile);
+        }
+    }
+    
 
     if (!outFile) {
         throw ios_base::failure("Error writting to output file");
