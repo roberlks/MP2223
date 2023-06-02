@@ -233,8 +233,6 @@ public:
      * @return A reference to this object.
      */
     Language operator+=(const Language& language);
-    friend std::ostream& operator<<(std::ostream& os, const Language& language);
-    friend std::istream& operator>>(std::istream& is, const Language& language);
     
 private:
     
