@@ -145,6 +145,11 @@
       <item path="src/Bigram.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="src/BigramCounter.cpp" ex="false" tool="1" flavor2="11">
+        <ccTool>
+          <incFile>
+            <pElem>include/BigramCounter.h</pElem>
+          </incFile>
+        </ccTool>
       </item>
       <item path="src/BigramFreq.cpp" ex="false" tool="1" flavor2="0">
       </item>

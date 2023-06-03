@@ -74,7 +74,7 @@ ${OBJECTDIR}/src/Bigram.o: src/Bigram.cpp
 ${OBJECTDIR}/src/BigramCounter.o: src/BigramCounter.cpp
 	${MKDIR} -p ${OBJECTDIR}/src
 	${RM} "$@.d"
-	$(COMPILE.cc) -g -Iinclude -std=c++14 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/BigramCounter.o src/BigramCounter.cpp
+	$(COMPILE.cc) -g -Iinclude -include include/BigramCounter.h -std=c++14 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/BigramCounter.o src/BigramCounter.cpp
 
 ${OBJECTDIR}/src/BigramFreq.o: src/BigramFreq.cpp
 	${MKDIR} -p ${OBJECTDIR}/src

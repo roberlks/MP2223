@@ -153,8 +153,8 @@ void Language::save(const char fileName[], char mode)  const {
         throw ios_base::failure("Error opening output file");
     }
     
-    outFile << this->MAGIC_STRING_T << endl;
-    if (mode == 'b'){
+    outFile << this->MAGIC_STRING_T << endl << this->_languageId << endl << this->_size << endl;
+    if (mode == 't'){
         outFile << *this;
     }
     else {
