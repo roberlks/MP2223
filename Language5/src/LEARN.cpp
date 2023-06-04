@@ -5,16 +5,13 @@
 
 /** 
  * @file LEARN.cpp
- * @author Silvia Acid Carrillo <acid@decsai.ugr.es>
- * @author Andrés Cano Utrera <acu@decsai.ugr.es>
- * @author Luis Castillo Vidal <L.Castillo@decsai.ugr.es>
- * 
+ * @author Roberto González Lugo
  * Created on 29 January 2023, 11:00
  */
 
 
-
-#include "Language.h"
+#include <cstring>
+#include "BigramCounter.h"
 using namespace std;
 /**
  * Shows help about the use of this program in the given output stream
@@ -46,19 +43,76 @@ void showEnglishHelp(ostream& outputStream) {
 using namespace std;
 
 int main(int argc,char *argv[]) {   
-    /*
-    string valid = "abcdefghijklmnopqrstuvwxyz\xE0\xE1\xE2\xE3\xE4\xE5\xE6\xE7\xE8\xE9\xEA\xEB\xEC\xED\xEE\xEF\xF0\xF1\xF2\xF3\xF4\xF5\xF6\xF8\xF9\xFA\xFB\xFC\xFD\xFE\xFF";
-    cout << "Valid chars:\n";
-    for (int i = 0; i < valid.length(); i++){
-        cout << valid[i] << endl;
+    //Processing of call parameters:
+
+    // Variables that store the info of the input parameters
+    
+    char mode = 't';//Text or binary mode
+    string languageID = "unknown";  // Name of the language
+    string outputFile = "output.bgr";  // Name of the output file
+
+    // Processing optional parameters
+    int argIndex = 1;
+    while (argIndex < argc && argv[argIndex][0] == '-') {
+        string arg = argv[argIndex];
+
+        if (arg == "-t") {
+            mode = 't';
+        } else if (arg == "-b") {
+            mode = 'b';
+        } else if (arg == "-l" && argIndex + 1 < argc) {
+            languageID = argv[argIndex + 1];
+            argIndex++;
+        } else if (arg == "-o" && argIndex + 1 < argc) {
+            outputFile = argv[argIndex + 1];
+            argIndex++;
+        }
+
+        argIndex++;
+    }
+    if (argc-argIndex < 1){
+        showEnglishHelp(cerr);
     }
     
-    cout << "DONE" << endl;
-    */
+    BigramCounter MyBc; //The BigramCounter to store the info of all books toguether
+    
+    //Read and add all the books that are inputed (At least 1)
+    for (int i = argIndex; i<argc; i++){
+        BigramCounter bc;
+        bc.calculateFrequencies(argv[i]);
+        MyBc += bc;
+    }
+    
     Language lg;
-    lg.load(argv[1]);
-    lg.save(argv[2]);
-    cout <<"Bigrams stored:\n" << lg;
-    cout << "REady\n" << endl;
+    lg = MyBc.toLanguage();
+    lg.setLanguageId(languageID);
+    
+    char outputFilename[outputFile.length() + 1];
+    strcpy(outputFilename, outputFile.c_str());
+    
+    lg.save(outputFilename, mode);
+    
+    
+    
+
+    return 0;
 }
+
+
+
+
+//Prueba parametros:
+    /*
+    // Imprimir los valores de los parámetros leídos
+    cout << "Modo de archivo de salida: " << (isBinary ? "Binario" : "Texto") << endl;
+    cout << "Idioma: " << language << endl;
+    cout << "Archivo de salida: " << outputFile << endl;
+
+    // Procesar los archivos de entrada (resto de los argumentos)
+    for (int i = argIndex; i < argc; i++) {
+        string inputFile = argv[i];
+        // Realizar el procesamiento necesario para cada archivo de entrada
+        cout << "Archivo de entrada: " << inputFile << endl;
+    }
+    */
 

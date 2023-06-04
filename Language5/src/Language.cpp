@@ -152,8 +152,13 @@ void Language::save(const char fileName[], char mode)  const {
     if (!outFile) {
         throw ios_base::failure("Error opening output file");
     }
-    
-    outFile << this->MAGIC_STRING_T << endl << this->_languageId << endl << this->_size << endl;
+    if (mode == 't'){
+        outFile << this->MAGIC_STRING_T;
+    }
+    else{
+        outFile << this->MAGIC_STRING_B;
+    }
+    outFile << endl << this->_languageId << endl << this->_size << endl;
     if (mode == 't'){
         outFile << *this;
     }
@@ -203,7 +208,9 @@ void Language::load(const char fileName[]) {
     inFile >> magicString;
     
     if (magicString != MAGIC_STRING_T) {
-        throw invalid_argument("Invalid magic string");
+        if (magicString != MAGIC_STRING_B){
+            throw invalid_argument("Invalid magic string");
+        }        
     }
     
     string id;
@@ -222,7 +229,15 @@ void Language::load(const char fileName[]) {
     // Crear un nuevo array de BigramFreq
     _vectorBigramFreq = new BigramFreq[_size];
     
-    inFile >> *this;
+    if (magicString == MAGIC_STRING_T){
+        inFile >> *this;
+    }
+    else{
+        for (int i = 0; i<_size; i++){
+            this->_vectorBigramFreq[i].deserialize(inFile); 
+        }
+    }
+    
 
     if (!inFile) {
         throw ios_base::failure("Error reading from file");

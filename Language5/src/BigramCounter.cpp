@@ -153,8 +153,8 @@ void BigramCounter::calculateFrequencies(char* fileName) {
     while (getline(file, line)) {
         // Procesar cada par de caracteres en la línea
         for (int i = 0; i < line.length() - 1; i++) {
-            char firstChar = line[i];
-            char secondChar = line[i + 1];
+            char firstChar = tolower(line[i]);
+            char secondChar = tolower(line[i + 1]);
 
             // Validar que los caracteres sean válidos
             int firstPos = CharToPos(firstChar);
