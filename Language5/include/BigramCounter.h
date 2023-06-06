@@ -134,7 +134,7 @@ public:
      * if the given file cannot be opened
      * @param fileName The name of the file to process. Input parameter
      */
-    void calculateFrequencies(char* fileName);
+    void calculateFrequencies(const char* fileName);
 
     /**
      * @brief Builds a Language object from this BigramCounter object. The 

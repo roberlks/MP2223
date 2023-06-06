@@ -233,11 +233,15 @@ public:
      * @return A reference to this object.
      */
     Language operator+=(const Language& language);
+    friend std::ostream& operator<<(std::ostream& os, const Language& language);
+    friend std::istream& operator>>(std::istream& is, Language& language);
+
     
 private:
     
     void Copy(const Language& orig);
 
+    void readFirstFields(std::istream& is);
     std::string _languageId; ///< language identifier
     BigramFreq* _vectorBigramFreq; ///< Dynamic array of BigramFreq
     int _size; ///< Number of elements in _vectorBigramFreq

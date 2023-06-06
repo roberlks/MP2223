@@ -40,7 +40,6 @@ void showEnglishHelp(ostream& outputStream) {
  */
 int main(int argc, char* argv[]) {
     
-/*
     bool min = true;
     int files = argc-2;
     int first = 1;
@@ -106,14 +105,7 @@ int main(int argc, char* argv[]) {
     
     delete[] languages; 
     return 0;
- * */
-
-Language lang; BigramFreq bf; bf.setFrequency(10); for (int i = 0; i < 10; i++) { Bigram b1(char((i/100)+'A'),char((i % 100)+'A')); bf.setBigram(b1); lang.append(bf);}lang.at(-1);    
-    
-    
-    
-cout << lang.getSize();			
-
+ 
 
 
 

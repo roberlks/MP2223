@@ -148,26 +148,22 @@ void Language::sort(){
 
 void Language::save(const char fileName[], char mode)  const {
     ofstream outFile;
-    outFile.open(fileName);
     if (!outFile) {
         throw ios_base::failure("Error opening output file");
     }
     if (mode == 't'){
-        outFile << this->MAGIC_STRING_T;
-    }
-    else{
-        outFile << this->MAGIC_STRING_B;
-    }
-    outFile << endl << this->_languageId << endl << this->_size << endl;
-    if (mode == 't'){
+        outFile.open(fileName)
+        outFile << this->MAGIC_STRING_T << endl;
         outFile << *this;
     }
-    else {
+    else if (mode == 'b'){
+        outFile.open(fileName, ios::out|ios::binary)
+        outFile << this->MAGIC_STRING_B << endl;
+        outFile << this->_languageId << endl << this->_size << endl;
         for (int i = 0; i< this->_size ; i++){
             this->_vectorBigramFreq[i].serialize(outFile);
         }
     }
-    
 
     if (!outFile) {
         throw ios_base::failure("Error writting to output file");
@@ -198,7 +194,7 @@ void Language::updateSize (const int nsize){
 void Language::load(const char fileName[]) {
 
     ifstream inFile;
-    inFile.open(fileName);
+    inFile.open(fileName, ios::in|ios::binary);
     
     if (!inFile) {
         throw ios_base::failure("Error opening file");
@@ -213,26 +209,12 @@ void Language::load(const char fileName[]) {
         }        
     }
     
-    string id;
-    inFile >> id;
-    setLanguageId(id);
-    
-    int size;
-    inFile >> size;  
-
-    // Limpiar la memoria existente
-    delete[] _vectorBigramFreq;
-    
-    // Asignar el nuevo tamaño del vector
-    _size = size;
-    
-    // Crear un nuevo array de BigramFreq
-    _vectorBigramFreq = new BigramFreq[_size];
-    
     if (magicString == MAGIC_STRING_T){
         inFile >> *this;
     }
     else{
+        readFirstFields(inFile);
+        inFile.get(); //Jump on \n
         for (int i = 0; i<_size; i++){
             this->_vectorBigramFreq[i].deserialize(inFile); 
         }
@@ -284,12 +266,34 @@ void Language::Copy(const Language& orig){
     }
 }
 
+void Language::readFirstFields(std::istream& is){
+    string id;
+    is >> id;
+    this->setLanguageId(id);
+    
+    int size;
+    is >> size;  
+    if (size <0){
+        throw out_of_range("Size must be positive");
+    }
+
+    // Limpiar la memoria existente
+    delete[] this->_vectorBigramFreq;
+    
+    // Asignar el nuevo tamaño del vector
+    this->_size = size;
+    
+    // Crear un nuevo array de BigramFreq
+    this->_vectorBigramFreq = new BigramFreq[this->_size];
+}
+
 ostream& operator<<(ostream& os, const Language& language){
     os << language.toString();
     return os;
 }
 istream& operator>>(istream& is, Language& language){
     
+    language.readFirstFields(is);
     for (int i = 0; i < language.getSize(); i++) {
         BigramFreq bf;
         is >> bf;

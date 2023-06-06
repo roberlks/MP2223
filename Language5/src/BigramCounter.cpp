@@ -133,13 +133,14 @@ BigramCounter& BigramCounter::operator+=(const BigramCounter& rhs){
     return *this;   
 }
 
-void BigramCounter::calculateFrequencies(char* fileName) {
+void BigramCounter::calculateFrequencies(const char* fileName) {
+    
     // Abrir el archivo de texto
     ifstream file(fileName);
     if (!file.is_open()) {
         throw ios_base::failure("Unable to open file");
     }
-
+    
     // Reiniciar las frecuencias a cero
     int n = getSize();
     for (int i = 0; i < n; i++) {
@@ -147,21 +148,33 @@ void BigramCounter::calculateFrequencies(char* fileName) {
             (*this)(i, j) = 0;
         }
     }
+    
+    
 
     // Leer el archivo línea por línea y calcular las frecuencias de los bigramas
     std::string line;
     while (getline(file, line)) {
+        
+        
         // Procesar cada par de caracteres en la línea
-        for (int i = 0; i < line.length() - 1; i++) {
-            char firstChar = tolower(line[i]);
-            char secondChar = tolower(line[i + 1]);
 
-            // Validar que los caracteres sean válidos
+        for (int i = 1; i < line.length(); i++) {
+            char firstChar = tolower(line[i-1]);
+            char secondChar = tolower(line[i]); 
+            
+            // Check that chars are valid
+            
             int firstPos = CharToPos(firstChar);
             int secondPos = CharToPos(secondChar);
-            if (firstPos != -1 && secondPos != -1) {
-                // Incrementar la frecuencia del bigrama correspondiente
-                (*this)(firstPos, secondPos)++;
+            
+            if (firstPos != string::npos) {
+                if (secondPos != string::npos) { //ESTO VALE?
+                    // Increment correspondent frequency
+                    (*this)(firstPos, secondPos)++;
+                }
+                else{
+                    i++;
+                }
             }
         }
     }

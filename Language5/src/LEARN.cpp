@@ -10,7 +10,6 @@
  */
 
 
-#include <cstring>
 #include "BigramCounter.h"
 using namespace std;
 /**
@@ -67,13 +66,18 @@ int main(int argc,char *argv[]) {
             outputFile = argv[argIndex + 1];
             argIndex++;
         }
+        else{
+            showEnglishHelp(cerr);
+            return 1;
+        }
 
         argIndex++;
     }
     if (argc-argIndex < 1){
         showEnglishHelp(cerr);
+        return 1;
     }
-    
+     
     BigramCounter MyBc; //The BigramCounter to store the info of all books toguether
     
     //Read and add all the books that are inputed (At least 1)
@@ -81,20 +85,17 @@ int main(int argc,char *argv[]) {
         BigramCounter bc;
         bc.calculateFrequencies(argv[i]);
         MyBc += bc;
-    }
+    }   
     
     Language lg;
     lg = MyBc.toLanguage();
     lg.setLanguageId(languageID);
     
-    char outputFilename[outputFile.length() + 1];
-    strcpy(outputFilename, outputFile.c_str());
+  
+    lg.sort();
     
-    lg.save(outputFilename, mode);
+    lg.save(outputFile.c_str(), mode);
     
-    
-    
-
     return 0;
 }
 

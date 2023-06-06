@@ -1,7 +1,6 @@
-build/LEARN/GNU-Linux/src/metamain.o: src/metamain.cpp src/LEARN.cpp \
+build/CLASSIFY/GNU-Linux/src/BigramCounter.o: src/BigramCounter.cpp \
  include/BigramCounter.h include/Language.h include/BigramFreq.h \
  include/Bigram.h
-src/LEARN.cpp:
 include/BigramCounter.h:
 include/Language.h:
 include/BigramFreq.h:

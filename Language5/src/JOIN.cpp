@@ -5,13 +5,14 @@
 
 /** 
  * @file JOIN.cpp
- * @author Silvia Acid Carrillo <acid@decsai.ugr.es>
- * @author Andrés Cano Utrera <acu@decsai.ugr.es>
- * @author Luis Castillo Vidal <L.Castillo@decsai.ugr.es>
- * 
+ * @author Roberto González Lugo
  * Created on 29 January 2023, 11:00
  */
 
+
+#include "Language.h"
+
+using namespace std;
 
 /**
  * Shows help about the use of this program in the given output stream
@@ -43,6 +44,47 @@ void showEnglishHelp(ostream& outputStream) {
  * @return 0 If there is no error; a value > 0 if error
  */
 int main(int argc, char* argv[]) {
- 
+    char mode_out = 't';//Text or binary mode
+    string outputFile = "output.bgr";  // Name of the output file
+
+    // Processing optional parameters
+    int argIndex = 1;
+    while (argIndex < argc && argv[argIndex][0] == '-') {
+        string arg = argv[argIndex];
+
+        if (arg == "-t") {
+            mode_out = 't';
+        } else if (arg == "-b") {
+            mode_out = 'b';
+        } else if (arg == "-o" && argIndex + 1 < argc) {
+            outputFile = argv[argIndex + 1];
+            argIndex++;
+        }
+        else{
+            showEnglishHelp(cerr);
+            return 1;
+        }
+
+        argIndex++;
+    }
+    if (argc-argIndex < 1){
+        showEnglishHelp(cerr);
+        return 1;
+    }
+    
+    Language lg;
+    lg.load(argv[argIndex]);
+    argIndex++;
+    for (int i = argIndex; i < argc; i++){
+        Language tmp;
+        tmp.load(argv[i]);
+        if (tmp.getLanguageId() == lg.getLanguageId())
+            lg += tmp;
+    }
+    lg.sort();
+    lg.save(outputFile.c_str(), mode_out);
+    
+    
+    return 0;
 }
 

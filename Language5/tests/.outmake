@@ -1,0 +1,25 @@
+"make" -f nbproject/Makefile-CLASSIFY.mk QMAKE= SUBPROJECTS= .build-conf
+make[1]: Entering directory '/home/roberlks222/Documents/Clase/MP/MP2223/Language5'
+"make"  -f nbproject/Makefile-CLASSIFY.mk dist/CLASSIFY/GNU-Linux/CLASSIFY
+make[2]: Entering directory '/home/roberlks222/Documents/Clase/MP/MP2223/Language5'
+mkdir -p build/CLASSIFY/GNU-Linux/src
+rm -f "build/CLASSIFY/GNU-Linux/src/Language.o.d"
+g++ -D CLASSIFY   -c -g -Iinclude -std=c++14 -MMD -MP -MF "build/CLASSIFY/GNU-Linux/src/Language.o.d" -o build/CLASSIFY/GNU-Linux/src/Language.o src/Language.cpp
+src/Language.cpp: In member function ‘void Language::save(const char*, char) const’:
+src/Language.cpp:155:31: error: expected ‘;’ before ‘outFile’
+  155 |         outFile.open(fileName)
+      |                               ^
+      |                               ;
+  156 |         outFile << this->MAGIC_STRING_T << endl;
+      |         ~~~~~~~                
+src/Language.cpp:160:53: error: expected ‘;’ before ‘outFile’
+  160 |         outFile.open(fileName, ios::out|ios::binary)
+      |                                                     ^
+      |                                                     ;
+  161 |         outFile << this->MAGIC_STRING_B << endl;
+      |         ~~~~~~~                                      
+make[2]: *** [nbproject/Makefile-CLASSIFY.mk:87: build/CLASSIFY/GNU-Linux/src/Language.o] Error 1
+make[2]: Leaving directory '/home/roberlks222/Documents/Clase/MP/MP2223/Language5'
+make[1]: *** [nbproject/Makefile-CLASSIFY.mk:63: .build-conf] Error 2
+make[1]: Leaving directory '/home/roberlks222/Documents/Clase/MP/MP2223/Language5'
+make: *** [nbproject/Makefile-impl.mk:40: .build-impl] Error 2
