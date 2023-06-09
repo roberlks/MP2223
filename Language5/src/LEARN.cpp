@@ -55,6 +55,7 @@ int main(int argc,char *argv[]) {
     while (argIndex < argc && argv[argIndex][0] == '-') {
         string arg = argv[argIndex];
 
+        
         if (arg == "-t") {
             mode = 't';
         } else if (arg == "-b") {
@@ -77,10 +78,10 @@ int main(int argc,char *argv[]) {
         showEnglishHelp(cerr);
         return 1;
     }
-     
-    BigramCounter MyBc; //The BigramCounter to store the info of all books toguether
     
-    //Read and add all the books that are inputed (At least 1)
+    BigramCounter MyBc; //The BigramCounter to store the info of all books together
+    
+    //Read and add all the books that are inputted (At least 1)
     for (int i = argIndex; i<argc; i++){
         BigramCounter bc;
         bc.calculateFrequencies(argv[i]);
@@ -91,9 +92,6 @@ int main(int argc,char *argv[]) {
     lg = MyBc.toLanguage();
     lg.setLanguageId(languageID);
     
-  
-    lg.sort();
-    
     lg.save(outputFile.c_str(), mode);
     
     return 0;
@@ -102,18 +100,4 @@ int main(int argc,char *argv[]) {
 
 
 
-//Prueba parametros:
-    /*
-    // Imprimir los valores de los parámetros leídos
-    cout << "Modo de archivo de salida: " << (isBinary ? "Binario" : "Texto") << endl;
-    cout << "Idioma: " << language << endl;
-    cout << "Archivo de salida: " << outputFile << endl;
-
-    // Procesar los archivos de entrada (resto de los argumentos)
-    for (int i = argIndex; i < argc; i++) {
-        string inputFile = argv[i];
-        // Realizar el procesamiento necesario para cada archivo de entrada
-        cout << "Archivo de entrada: " << inputFile << endl;
-    }
-    */
 

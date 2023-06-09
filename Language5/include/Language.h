@@ -232,7 +232,7 @@ public:
      * @param language A Language object. Input parameter
      * @return A reference to this object.
      */
-    Language operator+=(const Language& language);
+    Language& operator+=(const Language& language);
     friend std::ostream& operator<<(std::ostream& os, const Language& language);
     friend std::istream& operator>>(std::istream& is, Language& language);
 
@@ -241,7 +241,12 @@ private:
     
     void Copy(const Language& orig);
 
+    /*
+     * @Brief Reads the id and size fields for this alng object from @p is input stream
+     * @param is. Input stream to read from
+     */
     void readFirstFields(std::istream& is);
+    
     std::string _languageId; ///< language identifier
     BigramFreq* _vectorBigramFreq; ///< Dynamic array of BigramFreq
     int _size; ///< Number of elements in _vectorBigramFreq
@@ -263,8 +268,7 @@ std::ostream& operator<<(std::ostream& os, const Language& language);
  * read from the file is negative.
  * @param is The input stream to be used
  * @param language the Language object. Output parameter
- * @return @p is A reference to the input s#include <fstream>
-
+ * @return @p is A reference to the input stream
  */
 std::istream& operator>>(std::istream& is, Language& language);
 

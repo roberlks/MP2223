@@ -9,6 +9,10 @@
  * Created on 29 January 2023, 11:00
  */
 
+#include <regex>
+#include<sstream>
+
+
 #include "BigramCounter.h"
 
 using namespace std;
@@ -24,26 +28,6 @@ void showEnglishHelp(ostream& outputStream) {
     outputStream << endl;
 }
 void showFinalMessage (string language, double distance, ostream& outputStream = cout){
-//    const char separador = '|';
-//    const std::string FinalMessage = "Final decision: language | with a distance of |";
-//
-//    std::string primeraParte;
-//    std::string segundaParte;
-//
-//    // Buscar el primer separador
-//    size_t pos = FinalMessage.find(separador);
-//    if (pos != std::string::npos) {
-//        // Extraer la primera parte antes del separador
-//        primeraParte = FinalMessage.substr(0, pos);
-//
-//        // Buscar el segundo separador a partir de la posición siguiente
-//        size_t pos2 = FinalMessage.find(separador, pos + 1);
-//        if (pos2 != std::string::npos) {
-//            // Extraer la segunda parte entre los dos separadores
-//            segundaParte = FinalMessage.substr(pos + 1, pos2 - pos - 1);
-//        }
-//    }
-//    
     outputStream << "Final decision: language " << language << " with a distance of " << distance << endl;
 }
 /**
@@ -76,26 +60,21 @@ int main(int argc, char *argv[]) {
     lg_toClassify.sort();
     
     int files = argc-2;
-    
-    Language* languages = new Language[files];
-    
         
-    for (int i = 0; i<files; i++){
-        languages[i].load(argv[i+2]);
-    }
-
-    double distances[files];
+    Language lang_min;
+    double dist_min = 1000;
+    
     int pos_min = 0;
     for (int i = 0; i<files; i++){
-        //distances[i] = languages[i].getDistance(firstLanguage);
-        distances[i] = lg_toClassify.getDistance(languages[i]);        
-        if (distances[i] < distances[pos_min]){pos_min = i;}        
+        Language lang;
+        lang.load(argv[i+2]);
+//        distances[i] = lg_toClassify.getDistance(languages[i]);    
+        double dist = lg_toClassify.getDistance(lang); 
+        if (dist < dist_min){dist_min = dist; lang_min = lang;}        
     }
     
-    showFinalMessage(languages[pos_min].getLanguageId(), distances[pos_min]);
-    delete [] languages;
+    showFinalMessage(lang_min.getLanguageId(), dist_min);
     
     return 0;
     
 }
-

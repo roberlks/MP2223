@@ -20,6 +20,7 @@
       <itemPath>src/BigramCounter.cpp</itemPath>
       <itemPath>src/BigramFreq.cpp</itemPath>
       <itemPath>src/Language.cpp</itemPath>
+      <itemPath>PruebasCustom/TestingMain.cpp</itemPath>
       <itemPath>src/metamain.cpp</itemPath>
     </logicalFolder>
     <logicalFolder name="TestFiles"
@@ -51,6 +52,8 @@
           </incDir>
         </ccTool>
       </compileType>
+      <item path="PruebasCustom/TestingMain.cpp" ex="false" tool="1" flavor2="0">
+      </item>
       <item path="TMPPendiente.txt" ex="false" tool="3" flavor2="0">
       </item>
       <item path="include/Bigram.h" ex="false" tool="3" flavor2="0">
@@ -93,6 +96,8 @@
           <developmentMode>5</developmentMode>
         </asmTool>
       </compileType>
+      <item path="PruebasCustom/TestingMain.cpp" ex="false" tool="1" flavor2="0">
+      </item>
       <item path="TMPPendiente.txt" ex="false" tool="3" flavor2="0">
       </item>
       <item path="include/Bigram.h" ex="false" tool="3" flavor2="0">
@@ -132,6 +137,8 @@
           <output>${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/${CND_CONF}</output>
         </linkerTool>
       </compileType>
+      <item path="PruebasCustom/TestingMain.cpp" ex="false" tool="1" flavor2="0">
+      </item>
       <item path="TMPPendiente.txt" ex="false" tool="3" flavor2="0">
       </item>
       <item path="include/Bigram.h" ex="false" tool="3" flavor2="0">
@@ -176,6 +183,8 @@
           <output>${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/${CND_CONF}</output>
         </linkerTool>
       </compileType>
+      <item path="PruebasCustom/TestingMain.cpp" ex="false" tool="1" flavor2="0">
+      </item>
       <item path="TMPPendiente.txt" ex="false" tool="3" flavor2="0">
       </item>
       <item path="include/Bigram.h" ex="false" tool="3" flavor2="0">
@@ -215,6 +224,8 @@
           <output>${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/${CND_CONF}</output>
         </linkerTool>
       </compileType>
+      <item path="PruebasCustom/TestingMain.cpp" ex="false" tool="1" flavor2="0">
+      </item>
       <item path="TMPPendiente.txt" ex="false" tool="3" flavor2="0">
       </item>
       <item path="include/Bigram.h" ex="false" tool="3" flavor2="0">

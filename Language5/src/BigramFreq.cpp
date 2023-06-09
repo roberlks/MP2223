@@ -49,7 +49,7 @@ string BigramFreq::toString()const{
     return cad;
 }
 
-void BigramFreq::serialize(ostream& outputStream){
+void BigramFreq::serialize(ostream& outputStream) const{
     this->_bigram.serialize(outputStream);
     outputStream.write(reinterpret_cast<const char*>(&_frequency), sizeof(int));
 }

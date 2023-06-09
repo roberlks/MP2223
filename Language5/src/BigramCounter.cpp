@@ -47,33 +47,40 @@ BigramCounter::BigramCounter(const BigramCounter& orig){
 }
 
 BigramCounter::~BigramCounter() {
+    this->deallocate();
+}
+
+void BigramCounter::deallocate (){
+    if (_frequency==nullptr){
+        return;
+    } 
     for (int i = 0; i < getSize(); i++) {
         delete[] _frequency[i];
     }
     delete[] _frequency;
 }
 
-
 void BigramCounter::copy(const BigramCounter& orig) {
-    // Llamar al destructor para liberar la memoria actual
-    this->~BigramCounter();
 
-    // Copiar datos miembro
+
+
+    // Copy member fields
     this->_validCharacters = orig.getValidChar();
     
     int n = orig.getSize();
 
-    // Reservar memoria para la nueva matriz
+    // Reserve memory for the new matrix
     this->_frequency = new int*[n];
     for (int i = 0; i < n; i++) {
         this->_frequency[i] = new int[n];
     }
 
-    // Rellenar la matriz
+    // Fill matrix
     for (int i = 0; i < n; i++) {
         for (int j = 0; j < n; j++) {
             (*this)(i, j) = orig(i, j);
         }
+        
     }
 }
 
@@ -117,6 +124,10 @@ void BigramCounter::increaseFrequency(const Bigram& bigram, int frequency){
 }
 
 BigramCounter& BigramCounter::operator=(const BigramCounter& orig){
+    if (&orig == this){
+        return *this;
+    }
+    deallocate();
     copy(orig);
     return *this;
 }
@@ -135,13 +146,13 @@ BigramCounter& BigramCounter::operator+=(const BigramCounter& rhs){
 
 void BigramCounter::calculateFrequencies(const char* fileName) {
     
-    // Abrir el archivo de texto
+    // Open input file
     ifstream file(fileName);
     if (!file.is_open()) {
         throw ios_base::failure("Unable to open file");
     }
     
-    // Reiniciar las frecuencias a cero
+    //Reset all freqs to 0
     int n = getSize();
     for (int i = 0; i < n; i++) {
         for (int j = 0; j < n; j++) {
@@ -151,35 +162,32 @@ void BigramCounter::calculateFrequencies(const char* fileName) {
     
     
 
-    // Leer el archivo línea por línea y calcular las frecuencias de los bigramas
+    // Read line by line and calculate bigram frequencies
     std::string line;
     while (getline(file, line)) {
         
         
-        // Procesar cada par de caracteres en la línea
-
-        for (int i = 1; i < line.length(); i++) {
+        // Process each pair of chars from this line
+        int i = 1;
+        while (i < line.length()){
+            
             char firstChar = tolower(line[i-1]);
-            char secondChar = tolower(line[i]); 
-            
-            // Check that chars are valid
-            
             int firstPos = CharToPos(firstChar);
-            int secondPos = CharToPos(secondChar);
-            
-            if (firstPos != string::npos) {
-                if (secondPos != string::npos) { //ESTO VALE?
-                    // Increment correspondent frequency
-                    (*this)(firstPos, secondPos)++;
+
+            if (firstPos != string::npos){
+                char secondChar = tolower(line[i]); 
+                int secondPos = CharToPos(secondChar);
+                if (secondPos != string::npos){
+                    (*this)(firstPos, secondPos) ++;
                 }
-                else{
+                else
                     i++;
-                }
             }
+            i++;
         }
     }
 
-    // Cerrar el archivo
+    // Close input file
     file.close();
 }
 
@@ -198,6 +206,7 @@ Language BigramCounter::toLanguage() const{
             }
         }
     }
+    lg.sort();
     return lg;
 }
 

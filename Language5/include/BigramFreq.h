@@ -72,7 +72,7 @@ public:
      * method ostream::write(const char* s, streamsize n))
      * @param outputStream A output stream where this object will be serialized
      */
-    void serialize(std::ostream& outputStream);
+    void serialize( std::ostream& outputStream) const;
     
     /**
      * Deserializes this object from the given input stream. It first deserializes
@@ -81,7 +81,7 @@ public:
      * method istream::read(char* s, streamsize n))
      * @param inputSstream A input stream from which this object will be deserialized
      */
-    void deserialize(std::istream& inputSstream);
+    void deserialize( std::istream& inputSstream);
 
 private:
     Bigram _bigram; ///< the Bigram object
@@ -94,7 +94,7 @@ private:
  * @param bigramFreq the BigramFreq object. Input parameter
  * @return @p os A reference to the output stream
  */
-std::ostream& operator<<(std::ostream& os, const BigramFreq& bigramFreq);
+std::ostream& operator<<( std::ostream& os, const BigramFreq& bigramFreq);
 
 /**
  * @brief Overloading of the stream extraction operator for BigramFreq class
@@ -102,7 +102,7 @@ std::ostream& operator<<(std::ostream& os, const BigramFreq& bigramFreq);
  * @param bigramFreq the BigramFreq object. Output parameter
  * @return @p is A reference to the input stream
  */
-std::istream& operator>>(std::istream& is, BigramFreq& bigramFreq);
+std::istream& operator>>( std::istream& is, BigramFreq& bigramFreq);
 
 /**
  * @brief Overloading of the relational operator > for BigramFreq class

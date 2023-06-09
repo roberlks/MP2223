@@ -97,7 +97,7 @@ public:
      * The '\0' is not sent to the output stream
      * @param outputStream A output stream where this object will be serialized
      */
-    void serialize(std::ostream& outputStream);
+    void serialize(std::ostream& outputStream)const ;
     
     /**
      * Deserializes this object from the given input stream. It reads two

@@ -35,15 +35,10 @@ Bigram::Bigram(char first, char second){
         this->_text[2] = CNULL;
 }
 
-Bigram::Bigram(const char text[]){
+Bigram::Bigram(const char text[]) : _text{'_', '_', CNULL} {
     if(strlen(text) == 2){
         this->_text[0] = text[0];
         this->_text[1] = text[1];
-        this->_text[2] = CNULL;
-    }
-    else{ 
-        this->_text[0] = '_';
-        this->_text[1] = '_';
         this->_text[2] = CNULL;
     }
 }
@@ -74,7 +69,7 @@ void Bigram::toUpper(){
     _text[1] = toupper(_text[1]);
 }
 
-void Bigram::serialize(ostream& outputStream){
+void Bigram::serialize(ostream& outputStream) const{
     outputStream.write(reinterpret_cast<const char*>(&_text), sizeof(char)*2);
 }
 
@@ -88,7 +83,7 @@ void Bigram::deserialize(istream& inputStream) {
 
 bool isValidCharacter (char character, const string& validCharacters){
     
-    //Si la posicion de buscar el caracter en la string no es valida (es npos)
+    //If character is not in validCharacters, find() will return string::npos
     return (validCharacters.find(character) != string::npos);
 }
 

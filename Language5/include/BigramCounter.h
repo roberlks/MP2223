@@ -58,6 +58,12 @@ public:
     ~BigramCounter();
     
     /**
+     * @brief Deletes all the memory from this object
+     */
+    
+    void deallocate();
+    
+    /**
      * @brief Copies all data from @p orig to this bigramCounter object
      * @param orig The original BigramCounter object to copy from. Input Parameter
      */
