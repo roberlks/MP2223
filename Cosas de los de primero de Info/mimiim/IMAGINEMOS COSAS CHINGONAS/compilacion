@@ -1,0 +1,4 @@
+compilacion
+
+g++ RaylibMain.cpp Punto2D.cpp PoliReg.cpp Asteroide.cpp ConjuntoAsteroides.cpp -I. -lraylib -lpthread -ldl -L. -std=c++14 -o RaylibMain5
+
