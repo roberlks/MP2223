@@ -1,0 +1,18 @@
+==4655== Memcheck, a memory error detector
+==4655== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==4655== Using Valgrind-3.18.1 and LibVEX; rerun with -h for copyright info
+==4655== Command: /home/roberlks222/Documents/Clase/MP/MP2223/Language5Manueh/Language5/./dist/CLASSIFY/GNU-Linux/CLASSIFY
+==4655== 
+Error, run with the following parameters:
+CLASSIFY <text.txt> <lang1.bgr> [<lang2.bgr> <lang3.bgr> ....]
+          Obtains the identifier of the closest language to the input text file
+
+==4655== 
+==4655== HEAP SUMMARY:
+==4655==     in use at exit: 0 bytes in 0 blocks
+==4655==   total heap usage: 3 allocs, 3 frees, 72,740 bytes allocated
+==4655== 
+==4655== All heap blocks were freed -- no leaks are possible
+==4655== 
+==4655== For lists of detected and suppressed errors, rerun with: -s
+==4655== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)

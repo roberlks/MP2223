@@ -148,27 +148,33 @@ void Language::sort(){
 
 void Language::save(const char fileName[], char mode)  const {
     ofstream outFile;
-    if (!outFile) {
-        throw ios_base::failure("Error opening output file");
-    }
+
     if (mode == 't'){
         outFile.open(fileName);
+        if (!outFile) {
+            throw ios_base::failure("Error opening output file");
+        }
         outFile << this->MAGIC_STRING_T << endl;
         outFile << *this;
     }
     else if (mode == 'b'){
         outFile.open(fileName, ios::out|ios::binary);
+        if (!outFile.is_open()) {
+            throw ios_base::failure("Error opening output file");
+        }
         outFile << this->MAGIC_STRING_B << endl;
         outFile << this->_languageId << endl << this->_size << endl;
         for (int i = 0; i< this->_size ; i++){
             this->_vectorBigramFreq[i].serialize(outFile);
         }
     }
+    else
+        return;
 
     if (!outFile) {
         throw ios_base::failure("Error writting to output file");
     }
-
+    
     outFile.close();
 }
 
@@ -222,7 +228,7 @@ void Language::load(const char fileName[]) {
     
 
     if (!inFile) {
-        throw ios_base::failure("Error reading from file");
+        throw ios_base::failure("Error writing to file");
     }
 
     inFile.close();

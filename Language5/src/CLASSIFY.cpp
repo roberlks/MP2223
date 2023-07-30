@@ -57,15 +57,15 @@ int main(int argc, char *argv[]) {
     bc_toClassify.calculateFrequencies(argv[1]);
     lg_toClassify = bc_toClassify.toLanguage();
     
-    lg_toClassify.sort();
     
     int files = argc-2;
         
     Language lang_min;
-    double dist_min = 1000;
+    lang_min.load(argv[2]);
+    double dist_min = lg_toClassify.getDistance(lang_min);
     
-    int pos_min = 0;
-    for (int i = 0; i<files; i++){
+    
+    for (int i = 1; i<files; i++){
         Language lang;
         lang.load(argv[i+2]);
 //        distances[i] = lg_toClassify.getDistance(languages[i]);    
@@ -78,3 +78,4 @@ int main(int argc, char *argv[]) {
     return 0;
     
 }
+

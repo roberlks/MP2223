@@ -1,0 +1,7 @@
+"make" -f nbproject/Makefile-JOIN.mk QMAKE= SUBPROJECTS= .build-conf
+make[1]: Entering directory '/home/roberlks222/Documents/Clase/MP/MP2223/Language5Manueh/Language5'
+"make"  -f nbproject/Makefile-JOIN.mk dist/JOIN/GNU-Linux/JOIN
+make[2]: Entering directory '/home/roberlks222/Documents/Clase/MP/MP2223/Language5Manueh/Language5'
+make[2]: 'dist/JOIN/GNU-Linux/JOIN' is up to date.
+make[2]: Leaving directory '/home/roberlks222/Documents/Clase/MP/MP2223/Language5Manueh/Language5'
+make[1]: Leaving directory '/home/roberlks222/Documents/Clase/MP/MP2223/Language5Manueh/Language5'
